@@ -12,6 +12,7 @@ public abstract class CompteBancaire {
         this.numeroCompte = numeroCompte;
         this.titulaire = titulaire;
         this.dateOuverture = LocalDate.now();
+        this.solde = 0;
     }
 
     public CompteBancaire(String numeroCompte, double solde, Client titulaire, LocalDate dateOuverture) {
