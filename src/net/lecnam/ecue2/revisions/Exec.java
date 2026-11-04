@@ -19,5 +19,9 @@ public class Exec {
         compte1.retirer(1000);
         System.out.println(compte1.toString());
 
+        CompteEpargne compte2 = new CompteEpargne("123456789", client2, 0.03);
+
+        compte2.deposer(1500);
+        System.out.println(compte2.toString());
     }
 }
