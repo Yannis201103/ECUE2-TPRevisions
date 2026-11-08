@@ -23,5 +23,26 @@ public class Exec {
 
         compte2.deposer(1500);
         System.out.println(compte2.toString());
+
+        Banque banque = new Banque("Banque de France", 2);
+        banque.ajouterCompte(compte1);
+        banque.ajouterCompte(compte2);
+
+        System.out.println("Virement valide : " + banque.effectuerVirement(
+                compte1.getNumeroCompte(), compte2.getNumeroCompte(), 100));
+
+        try {
+            banque.effectuerVirement("74838740347", compte2.getNumeroCompte(), 100);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Compte inexistant : " + e.getMessage());
+        }
+
+        try {
+            banque.effectuerVirement(compte1.getNumeroCompte(), compte2.getNumeroCompte(), 100000);
+        } catch (SoldeInsuffisantException e) {
+            System.out.println("Solde insuffisant : " + e.getMessage());
+        }
+
+        
     }
 }

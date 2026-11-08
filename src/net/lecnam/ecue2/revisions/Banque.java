@@ -64,4 +64,25 @@ public class Banque {
         }
         return soldeTotal;
     }
+
+    public boolean effectuerVirement(String numeroCompteSource, String numeroCompteDestination, double montant) throws SoldeInsuffisantException {
+        CompteBancaire compteSource = rechercherCompte(numeroCompteSource);
+        CompteBancaire compteDestination = rechercherCompte(numeroCompteDestination);
+
+        if (montant <= 0) {
+            throw new IllegalArgumentException("Le montant du virement doit être strictement positif.");
+        }
+
+        if (compteSource == null || compteDestination == null) {
+            throw new IllegalArgumentException("L'un des comptes spécifiés n'existe pas.");
+        }
+
+        if (compteSource.getSolde() < montant) {
+            throw new SoldeInsuffisantException("Solde insuffisant pour effectuer le virement.");
+        }
+
+        compteSource.debiter(montant);
+        compteDestination.deposer(montant);
+        return true;
+    }
 }
